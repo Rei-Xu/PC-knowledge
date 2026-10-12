@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>電腦小勇士</title>
+<link rel="stylesheet" href="style.css?v=20261012b">
+</head>
+<body>
+
+<!-- ===== 首頁 ===== -->
+<section id="screen-home" class="screen active">
+  <button id="btn-teacher" class="gear" title="老師模式">⚙</button>
+  <h1 class="title">🖱️ 電腦小勇士</h1>
+  <p class="subtitle">鍵盤、滑鼠、資料夾、視窗，你都會了嗎？一關一關來挑戰！</p>
+  <div id="level-list" class="level-list"></div>
+  <p class="tip">請用 Edge 或 Chrome 開啟。</p>
+</section>
+
+<!-- ===== 遊戲畫面 ===== -->
+<section id="screen-game" class="screen">
+  <header class="game-header">
+    <button id="btn-quit" class="btn small">← 回首頁</button>
+    <div id="level-name" class="level-name"></div>
+    <div class="game-stats">
+      <span id="progress">1 / 8</span>
+      <span id="score" class="score">⭐ 0</span>
+      <span id="timer" class="timer hidden">⏱ 0 秒</span>
+    </div>
+  </header>
+
+  <div class="q-box">
+    <div id="q-type" class="q-type"></div>
+    <div id="q-text" class="q-text"></div>
+  </div>
+
+  <div id="demo-box" class="demo-box hidden"></div>
+  <div id="stage" class="stage"></div>
+
+  <div id="feedback" class="feedback hidden">
+    <div id="fb-title" class="fb-title"></div>
+    <div id="fb-explain" class="fb-explain"></div>
+    <button id="btn-next" class="btn">下一題 ➡</button>
+  </div>
+  <div id="hint" class="hint"></div>
+</section>
+
+<!-- ===== 結算畫面 ===== -->
+<section id="screen-result" class="screen">
+  <h1 class="title">🎉 闖關完成！</h1>
+  <div id="result-level" class="result-level"></div>
+  <div id="result-stars" class="stars"></div>
+  <div class="result-grid">
+    <div class="result-item"><div class="label">答對</div><div id="r-correct" class="value">0</div></div>
+    <div class="result-item"><div class="label">題數</div><div id="r-total" class="value">0</div></div>
+    <div class="result-item"><div class="label">正確率</div><div id="r-acc" class="value">0%</div></div>
+    <div class="result-item"><div class="label">時間</div><div id="r-time" class="value">0 秒</div></div>
+  </div>
+  <div id="review" class="review"></div>
+  <div id="record-box" class="record-box">
+    <p>老師要記錄成績嗎？請輸入座號或姓名：</p>
+    <input id="record-name" type="text" placeholder="例如：15 或 15 王小明" autocomplete="off">
+    <div class="home-actions">
+      <button id="btn-save-record" class="btn">💾 記錄成績</button>
+      <button id="btn-skip-record" class="btn secondary">跳過</button>
+    </div>
+    <p id="record-msg" class="tip"></p>
+  </div>
+  <div class="home-actions">
+    <button id="btn-retry" class="btn">🔁 再玩一次</button>
+    <button id="btn-next-level" class="btn">➡ 下一關</button>
+    <button id="btn-result-home" class="btn secondary">🏠 回首頁</button>
+  </div>
+</section>
+
+<!-- ===== 老師模式 ===== -->
+<section id="screen-teacher" class="screen">
+  <header class="game-header">
+    <button id="btn-teacher-quit" class="btn small">← 回首頁</button>
+    <div class="level-name">老師模式</div>
+    <div></div>
+  </header>
+  <div class="teacher-panel">
+    <h2>設定</h2>
+    <div id="settings-form" class="settings-form"></div>
+    <div class="home-actions">
+      <button id="btn-save-settings" class="btn">儲存設定</button>
+      <button id="btn-reset-settings" class="btn secondary">恢復預設</button>
+      <span id="settings-msg" class="tip"></span>
+    </div>
+
+    <h2>成績記錄（只存在這台電腦）</h2>
+    <div class="home-actions">
+      <button id="btn-export-csv" class="btn">⬇ 匯出 CSV</button>
+      <button id="btn-clear-records" class="btn danger">🗑 清空記錄</button>
+    </div>
+    <div class="table-wrap">
+      <table id="records-table">
+        <thead><tr><th>日期</th><th>座號／姓名</th><th>關卡</th><th>答對</th><th>題數</th><th>正確率</th><th>時間</th><th>星星</th><th>答錯的題目</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 老師密碼 ===== -->
+<div id="pw-dialog" class="pw-dialog hidden">
+  <div class="pw-box">
+    <h2>🔒 老師模式</h2>
+    <input id="pw-input" type="password" placeholder="請輸入老師密碼" autocomplete="off">
+    <p id="pw-msg" class="tip"></p>
+    <div class="home-actions">
+      <button id="btn-pw-ok" class="btn">進入</button>
+      <button id="btn-pw-cancel" class="btn secondary">取消</button>
+    </div>
+  </div>
+</div>
+
+<!-- 答對的動畫覆蓋層 -->
+<div id="flash" class="flash hidden"></div>
+
+<!-- ※ 改過程式後，請把下面所有 ?v=20261012b 改成新的日期，學生電腦才不會拿到快取的舊版 -->
+<script src="core.js?v=20261012b"></script>
+<script src="art.js?v=20261012b"></script>
+<script src="demo.js?v=20261012b"></script>
+<script src="questions.js?v=20261012b"></script>
+<script src="app.js?v=20261012b"></script>
+</body>
+</html>
